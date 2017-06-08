@@ -7,7 +7,7 @@ int main()
 
 	while (run == 1)
 	{
-		init();
+
 		flag = menu();
 	
 		switch (flag)

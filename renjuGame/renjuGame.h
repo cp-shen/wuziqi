@@ -24,7 +24,6 @@ struct renju
 	struct renju *next;
 };
 
-void init();
 int menu();
 void battle();
 void battleMenu();

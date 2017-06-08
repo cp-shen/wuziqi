@@ -2,34 +2,21 @@
 
 int menu()
 {
-	IMAGE button_start, button_exit, button_start_2, button_exit_2;
-
-	loadimage(&button_start, L"button_start.jpg",160,122);
-	loadimage(&button_exit, L"button_exit.jpg",160,122);
-	loadimage(&button_start_2, L"button_start_2.jpg",160,122);
-	loadimage(&button_exit_2, L"button_exit_2.jpg",160,122);
-
-	MOUSEMSG mouse;
+	initgraph(720, 720);
+	IMAGE background, button_start_1, button_start_2, button_exit_1, button_exit_2;
 	
-	while (1)
-	{
-		mouse = GetMouseMsg();
-		
-		if (mouse.x > 300 && mouse.x < 460 && mouse.y>250 && mouse.y < 372)
-			putimage(300, 250, &button_start_2);
-		else
-			putimage(300, 250, &button_start);
+	loadimage(&background, L"C:\\Users\\29093\\Desktop\\wuziqi\\background.jpg", 720, 720);
+	loadimage(&button_start_1, L"C:\\Users\\29093\\Desktop\\wuziqi\\button_start_1.jpg", 180, 90);
+	loadimage(&button_start_2, L"C:\\Users\\29093\\Desktop\\wuziqi\\button_start_2.jpg", 180, 90);
+	loadimage(&button_exit_1, L"C:\\Users\\29093\\Desktop\\wuziqi\\button_exit_1.jpg", 180, 90);
+	loadimage(&button_exit_2, L"C:\\Users\\29093\\Desktop\\wuziqi\\button_exit_2.jpg", 180, 90);
 
-		if (mouse.x > 300 && mouse.x < 460 && mouse.y>400 && mouse.y < 522)
-			putimage(300, 400, &button_exit_2);
-		else
-			putimage(300, 400, &button_exit);
+	putimage(0, 0, &background);
+	putimage(270, 200, &button_start_1);
+	putimage(270, 300, &button_exit_1);
 
-		if ( (mouse.x > 300 && mouse.x < 460 && mouse.y>250 && mouse.y < 372) && (mouse.mkLButton) )
-			return START;
+	
 
-		if ((mouse.x > 300 && mouse.x < 460 && mouse.y>400 && mouse.y < 522) && (mouse.mkLButton))
-			return EXIT;
-	}
-
+	getchar();
+	return 0;
 }
