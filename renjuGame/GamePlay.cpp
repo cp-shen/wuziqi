@@ -39,15 +39,15 @@ void play(struct renju *head,int player, int *turn_p)
 {
 	MOUSEMSG mouse = GetMouseMsg();
 	
-	while (!(mouse.uMsg == WM_LBUTTONDOWN && mouse.x > 516 && mouse.x < 1010 && mouse.y>96 && mouse.y < 590))
+	while (!(mouse.uMsg == WM_LBUTTONDOWN && mouse.x > 115 && mouse.x < 610 && mouse.y>115 && mouse.y < 610))
 		//若没有发生有效点击，就一直检测鼠标
 		mouse = GetMouseMsg();
 
 	
 	int i, j;
 	
-	i = (mouse.x + 1 - 500+16) / 33;
-	j = (mouse.y + 1 - 80+16) / 33;
+	i = (mouse.x - 100+16) / 33;
+	j = (mouse.y - 100+16) / 33;
 
 
 	while (head->next != NULL)
@@ -91,7 +91,7 @@ void draw(struct renju*head)
 	else
 		setfillcolor(BLACK);
 
-	solidcircle(500 + 33 * head->x - 1, 80 + 33 * head->y - 1,12);
+	solidcircle(99 + 33 * head->x , 99 + 33 * head->y ,12);
 }
 
 struct renju *search(struct renju *head ,int x,int y)
@@ -152,7 +152,7 @@ int isWin(struct renju *head)
 	i = x-4;
 	j = y-4;
 
-	while (!(i == x && j == y))
+	while (!(i == x+1 && j == y+1))
 	{
 		if (search(head, i, j) != NULL && search(head, i, j)->player == last->player
 			&&search(head, i + 1, j + 1) != NULL && search(head, i + 1, j + 1)->player == last->player
@@ -173,9 +173,9 @@ int isWin(struct renju *head)
 	i = x+4;
 	j = y-4;
 
-	while (!(i == x && j == y))
+	while (!(i == x-1 && j == y+1))
 	{
-		if (search(head, i, j) != NULL && search(head, i, j)->player == last->player
+		if (  search(head, i, j) != NULL && search(head, i, j)->player == last->player
 			&&search(head, i - 1, j + 1) != NULL && search(head, i - 1, j + 1)->player == last->player
 			&&search(head, i - 2, j + 2) != NULL && search(head, i - 2, j + 2)->player == last->player
 			&&search(head, i - 3, j + 3) != NULL && search(head, i - 3, j + 3)->player == last->player
