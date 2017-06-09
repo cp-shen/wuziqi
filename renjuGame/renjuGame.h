@@ -36,10 +36,10 @@ struct inst
 };
 
 //GUIÄ£¿é
-int menu();
-void menuInit();
+int runMenu();
+void initMenu();
 struct inst runInterface();
-void interfaceInit();
+void initInterface();
 
 //GamePlayÄ£¿é
 void battle();

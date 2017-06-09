@@ -1,6 +1,6 @@
 #include "renjuGame.h"
 
-void interfaceInit()
+void initInterface()
 {
 	IMAGE board, button_regret_1;
 	loadimage(&board, L"board.jpg");

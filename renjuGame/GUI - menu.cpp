@@ -1,5 +1,5 @@
 #include "renjuGame.h"
-void menuInit()
+void initMenu()
 {
 	initgraph(720, 720);
 	IMAGE background, button_start_1, button_exit_1;
@@ -13,7 +13,7 @@ void menuInit()
 	putimage(270, 350, &button_exit_1);
 }
 
-int menu()
+int runMenu()
 {
 	IMAGE  button_start_1, button_start_2, button_exit_1, button_exit_2;
 	

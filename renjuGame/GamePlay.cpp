@@ -2,7 +2,7 @@
 
 void battle()
 {
-	interfaceInit();
+	initInterface();
 	struct inst instruction;
 
 	int turn = 0;
@@ -97,7 +97,7 @@ void draw(struct renju*head)
 
 void redraw(struct renju *head)
 {
-	interfaceInit();
+	initInterface();
 
 	while (head != NULL)
 	{
@@ -223,8 +223,11 @@ void regret(struct renju **headPointer, int *turn_p)
 {
 	if ((*headPointer)->next == NULL)
 		//此时还未下子，只有一个空节点，悔棋无效
+	{
+		(*turn_p)= (*turn_p) -1;
+		//无效悔棋，只取消本回合行动
 		return;
-
+	}
 	else if ((*headPointer)->next->next == NULL)
 		//此时只有一个子，有两个节点
 	{
@@ -232,7 +235,8 @@ void regret(struct renju **headPointer, int *turn_p)
 		(*headPointer)->next = NULL;
 		//重置为只有一个空节点，改变头指针
 
-		*turn_p--;
+		(*turn_p)= (*turn_p) -2;
+		//成功悔棋，取消本回合和上回合行动
 	}
 
 	else
@@ -247,7 +251,8 @@ void regret(struct renju **headPointer, int *turn_p)
 		headcpy->next = (struct renju*)malloc(LEN);
 		headcpy->next->next = NULL;
 		//将最后一次落子，即倒数第二个节点变为空节点
-		*turn_p--;
+		(*turn_p)= (*turn_p)-2;
+		//成功悔棋，取消本回合和上回合行动
 
 	}
 }
