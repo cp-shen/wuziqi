@@ -2,11 +2,10 @@
 
 void battle()
 {
-	battleInit();
+	struct inst instruction;
 
 	int turn = 0;
 	int *turn_p = &turn;
-
 	int win = NONE;
 
 	struct renju *head = (struct renju *)malloc(LEN);
@@ -15,15 +14,15 @@ void battle()
 	while (win == NONE)
 	{
 		turn++;
+		instruction = getInst();
 
-		if (turn % 2 == 1)
-			play(head, WHITE_PLAYER,turn_p);
-		else
-			play(head, BLACK_PLAYER,turn_p);
+		if (turn % 2 == 1 && instruction.operation== GO)
+			play(head, WHITE_PLAYER,turn_p, instruction);
+		else if (turn % 2 == 0 && instruction.operation == GO)
+			play(head, BLACK_PLAYER,turn_p, instruction);
 
 		draw(head);
 		
-
 		win = isWin(head);
 	}
 
@@ -35,21 +34,11 @@ void battle()
 
 }
 
-void play(struct renju *head,int player, int *turn_p)
+void play(struct renju *head,int player, int *turn_p,struct inst instruction)
 {
-	MOUSEMSG mouse = GetMouseMsg();
-	
-	while (!(mouse.uMsg == WM_LBUTTONDOWN && mouse.x > 115 && mouse.x < 610 && mouse.y>115 && mouse.y < 610))
-		//若没有发生有效点击，就一直检测鼠标
-		mouse = GetMouseMsg();
-
-	
-	int i, j;
-	
-	i = (mouse.x - 100+16) / 33;
-	j = (mouse.y - 100+16) / 33;
-
-
+	int i = instruction.x;
+	int j = instruction.y;
+		
 	while (head->next != NULL)
 	{
 		if (head->x == i&&head->y == j)
@@ -63,21 +52,18 @@ void play(struct renju *head,int player, int *turn_p)
 	if (head->x == i&&head->y == j)
 	{
 		(*turn_p)--;
-		return;//检测最后一个节点的棋子是否在点击处
+		return;//此时该处已经有棋子(最后一个节点)
 	}
-
 
 	head->x = i;
 	head->y = j;
 	head->player = player;
 	head->turn = *turn_p;
 
-
-	head->next= (struct renju *)malloc(LEN);
+	head->next = (struct renju *)malloc(LEN);
 	//申请新节点
 	head = head->next;
 	head->next = NULL;
-
 }
 
 void draw(struct renju*head)
@@ -198,21 +184,9 @@ int isWin(struct renju *head)
 	return NONE;
 }
 
-
-
-
-
-void battleInit()
+void regret(struct renju *head, int *turn_p)
 {
-	IMAGE board;
-	loadimage(&board, L"C:\\Users\\29093\\Desktop\\wuziqi\\board.jpg");
-	putimage(100, 100, &board);
-
-	int i,j;
-	for (i = 1; i <= 15; i++)
-		line(99 + 33 * i, 132, 99 + 33 * i , 594);
-
-	for (j = 1; j <= 15; j++)
-		line(132, 99 + 33 * j, 594, 99 + 33 * j);
 }
+
+
 

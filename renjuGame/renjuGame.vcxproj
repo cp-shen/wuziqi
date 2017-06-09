@@ -140,8 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GamePlay.cpp" />
+    <ClCompile Include="GUI - interface.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="GUI - menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renjuGame.h" />
