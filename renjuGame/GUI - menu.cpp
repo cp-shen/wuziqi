@@ -1,19 +1,26 @@
 #include "renjuGame.h"
-
-int menu()
+void menuInit()
 {
 	initgraph(720, 720);
-	IMAGE background, button_start_1, button_start_2, button_exit_1, button_exit_2;
-	
+	IMAGE background, button_start_1, button_exit_1;
+
 	loadimage(&background, L"background.jpg", 720, 720);
 	loadimage(&button_start_1, L"button_start_1.jpg", 180, 90);
-	loadimage(&button_start_2, L"button_start_2.jpg", 180, 90);
 	loadimage(&button_exit_1, L"button_exit_1.jpg", 180, 90);
-	loadimage(&button_exit_2, L"button_exit_2.jpg", 180, 90);
 
 	putimage(0, 0, &background);
 	putimage(270, 250, &button_start_1);
 	putimage(270, 350, &button_exit_1);
+}
+
+int menu()
+{
+	IMAGE  button_start_1, button_start_2, button_exit_1, button_exit_2;
+	
+	loadimage(&button_start_1, L"button_start_1.jpg", 180, 90);
+	loadimage(&button_start_2, L"button_start_2.jpg", 180, 90);
+	loadimage(&button_exit_1, L"button_exit_1.jpg", 180, 90);
+	loadimage(&button_exit_2, L"button_exit_2.jpg", 180, 90);
 
 	MOUSEMSG mouse;
 	while(1)

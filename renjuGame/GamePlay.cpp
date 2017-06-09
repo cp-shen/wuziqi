@@ -2,6 +2,7 @@
 
 void battle()
 {
+	interfaceInit();
 	struct inst instruction;
 
 	int turn = 0;
@@ -14,19 +15,29 @@ void battle()
 	while (win == NONE)
 	{
 		turn++;
-		instruction = getInst();
+		instruction = runInterface();
+		Sleep(100);//防止按住鼠标的连续读取
 
-		if (turn % 2 == 1 && instruction.operation== GO)
-			play(head, WHITE_PLAYER,turn_p, instruction);
+		if (turn % 2 == 1 && instruction.operation == GO)
+		{
+			play(head, WHITE_PLAYER, turn_p, instruction);
+			draw(head);
+		}
 		else if (turn % 2 == 0 && instruction.operation == GO)
-			play(head, BLACK_PLAYER,turn_p, instruction);
-
-		draw(head);
+		{
+			play(head, BLACK_PLAYER, turn_p, instruction);
+			draw(head);
+		}
+		else if (instruction.operation == REGRET)
+		{
+			regret(&head, turn_p);
+			redraw(head);
+		}
 		
 		win = isWin(head);
 	}
 
-	while (head->next->next != NULL)
+	while (head->next!=NULL && head->next->next != NULL)
 		head = head->next;
 
 	head->next = NULL;
@@ -41,7 +52,7 @@ void play(struct renju *head,int player, int *turn_p,struct inst instruction)
 		
 	while (head->next != NULL)
 	{
-		if (head->x == i&&head->y == j)
+		if (head->x == i&&head->y == j &&(head->player == BLACK_PLAYER||head->player==WHITE_PLAYER) )
 		{
 			(*turn_p)--;
 			return;//此时该处已经有棋子
@@ -49,7 +60,7 @@ void play(struct renju *head,int player, int *turn_p,struct inst instruction)
 		head = head->next;
 	}
 
-	if (head->x == i&&head->y == j)
+	if (head->x == i&&head->y == j && (head->player == BLACK_PLAYER || head->player == WHITE_PLAYER))
 	{
 		(*turn_p)--;
 		return;//此时该处已经有棋子(最后一个节点)
@@ -68,16 +79,40 @@ void play(struct renju *head,int player, int *turn_p,struct inst instruction)
 
 void draw(struct renju*head)
 {
-	while (head->next->next != NULL)
+	while (head->next != NULL && head->next->next != NULL)
 		//尾部为空节点，故最后一个棋子在倒数第二个节点
 		head = head->next;
 
 	if (head->player == WHITE_PLAYER)
+	{
 		setfillcolor(WHITE);
-	else
+		solidcircle(99 + 33 * head->x, 99 + 33 * head->y, 12);
+	}
+	else if (head->player == BLACK_PLAYER)
+	{
 		setfillcolor(BLACK);
+		solidcircle(99 + 33 * head->x, 99 + 33 * head->y, 12);
+	}
+}
 
-	solidcircle(99 + 33 * head->x , 99 + 33 * head->y ,12);
+void redraw(struct renju *head)
+{
+	interfaceInit();
+
+	while (head != NULL)
+	{
+		if (head->player == WHITE_PLAYER)
+		{
+			setfillcolor(WHITE);
+			solidcircle(99 + 33 * head->x, 99 + 33 * head->y, 12);
+		}
+		else if (head->player == BLACK_PLAYER)
+		{
+			setfillcolor(BLACK);
+			solidcircle(99 + 33 * head->x, 99 + 33 * head->y, 12);
+		}
+		head = head->next;
+	}
 }
 
 struct renju *search(struct renju *head ,int x,int y)
@@ -96,7 +131,7 @@ struct renju *search(struct renju *head ,int x,int y)
 int isWin(struct renju *head)
 {
 	struct renju *last = head;
-	while (last->next->next != NULL)
+	while (last->next!=NULL && last->next->next != NULL)
 		last = last->next;
 	//找到最后一个落子的节点
 
@@ -184,9 +219,36 @@ int isWin(struct renju *head)
 	return NONE;
 }
 
-void regret(struct renju *head, int *turn_p)
+void regret(struct renju **headPointer, int *turn_p)
 {
+	if ((*headPointer)->next == NULL)
+		//此时还未下子，只有一个空节点，悔棋无效
+		return;
+
+	else if ((*headPointer)->next->next == NULL)
+		//此时只有一个子，有两个节点
+	{
+		(*headPointer) = (struct renju*)malloc(LEN);
+		(*headPointer)->next = NULL;
+		//重置为只有一个空节点，改变头指针
+
+		*turn_p--;
+	}
+
+	else
+		//此时至少有两个子，有至少三个节点
+	{
+		struct renju *headcpy = *headPointer;
+		//创建一个指针为头指针的复制，避免头指针被改变
+		while (headcpy->next->next->next != NULL)
+			headcpy = headcpy->next;
+			//找到倒数第二次落子的节点，即倒数第三个节点
+
+		headcpy->next = (struct renju*)malloc(LEN);
+		headcpy->next->next = NULL;
+		//将最后一次落子，即倒数第二个节点变为空节点
+		*turn_p--;
+
+	}
 }
-
-
 

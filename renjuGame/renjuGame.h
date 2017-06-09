@@ -35,13 +35,20 @@ struct inst
 	int y;//棋盘上落子纵坐标
 };
 
+//GUI模块
 int menu();
+void menuInit();
+struct inst runInterface();
+void interfaceInit();
+
+//GamePlay模块
 void battle();
 void play(struct renju *head,int player,int *turn_p, struct inst instruction);
-void regret(struct renju *head, int *turn_p);
+void regret(struct renju **head, int *turn_p);
+void redraw(struct renju *head);
 void draw(struct renju *head);
 int isWin(struct renju *head);
 struct renju *search(struct renju *head, int x, int y);
-struct inst getInst();
+
 
 #endif // !renju_h

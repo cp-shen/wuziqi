@@ -1,11 +1,10 @@
 #include "renjuGame.h"
 
-struct inst getInst()
+void interfaceInit()
 {
-	IMAGE board, button_regret_1, button_regret_2;
+	IMAGE board, button_regret_1;
 	loadimage(&board, L"board.jpg");
 	loadimage(&button_regret_1, L"button_regret_1.jpg", 100, 50);
-	loadimage(&button_regret_2, L"button_regret_2.jpg", 100, 50);
 
 	putimage(100, 100, &board);
 	putimage(0, 300, &button_regret_1);
@@ -16,6 +15,14 @@ struct inst getInst()
 
 	for (j = 1; j <= 15; j++)
 		line(132, 99 + 33 * j, 594, 99 + 33 * j);
+}
+
+
+struct inst runInterface()
+{
+	IMAGE button_regret_1, button_regret_2;
+	loadimage(&button_regret_1, L"button_regret_1.jpg", 100, 50);
+	loadimage(&button_regret_2, L"button_regret_2.jpg", 100, 50);
 
 	struct inst instruction;
 	//要返回的结构体变量
@@ -25,7 +32,7 @@ struct inst getInst()
 	//读取鼠标位置
 	{
 		mouse = GetMouseMsg();
-		if (mouse.mkCtrl == true && mouse.x > 115 && mouse.x < 610 && mouse.y>115 && mouse.y < 610)
+		if (mouse.mkLButton == true && mouse.x > 115 && mouse.x < 610 && mouse.y>115 && mouse.y < 610)
 		{
 			instruction.operation = GO;
 			instruction.x = (mouse.x - 100 + 16) / 33;
