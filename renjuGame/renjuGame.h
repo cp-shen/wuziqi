@@ -25,11 +25,11 @@ struct renju
 };
 
 int menu();
+void battleInit();
 void battle();
-void battleMenu();
 void play(struct renju *head,int player,int *turn_p);
 void draw(struct renju *head);
 int isWin(struct renju *head);
 struct renju *search(struct renju *head, int x, int y);
-void showWinner(int win);
+
 #endif // !renju_h

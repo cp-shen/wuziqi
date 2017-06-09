@@ -2,7 +2,7 @@
 
 void battle()
 {
-	battleMenu();
+	battleInit();
 
 	int turn = 0;
 	int *turn_p = &turn;
@@ -33,7 +33,6 @@ void battle()
 	head->next = NULL;
 	//É¾³ýÎ²²¿¿Õ½Úµã
 
-	showWinner(win);
 }
 
 void play(struct renju *head,int player, int *turn_p)
@@ -199,40 +198,21 @@ int isWin(struct renju *head)
 	return NONE;
 }
 
-void showWinner(int win)
+
+
+
+
+void battleInit()
 {
-	IMAGE black, white, tie,notice;
-	loadimage(&black, L"black_win.jpg");
-	loadimage(&white, L"white_win.jpg");
-	loadimage(&tie, L"tie.jpg");
-	loadimage(&notice, L"notice.jpg");
+	IMAGE board;
+	loadimage(&board, L"C:\\Users\\29093\\Desktop\\wuziqi\\board.jpg");
+	putimage(100, 100, &board);
 
-	switch (win)
-	{
-	case BLACK_PLAYER:
-		putimage(500, 0, &black);
-		break;
-	case WHITE_PLAYER:
-		putimage(500, 0, &white);
-		break;
-	case TIE:
-		putimage(500, 0, &tie);
-	}
+	int i,j;
+	for (i = 1; i <= 15; i++)
+		line(99 + 33 * i, 132, 99 + 33 * i , 594);
 
-	putimage(700, 0, &notice);
-
-	while (1)
-	{
-		if (GetMouseMsg().mkRButton == true)
-			break;
-	}
+	for (j = 1; j <= 15; j++)
+		line(132, 99 + 33 * j, 594, 99 + 33 * j);
 }
 
-void battleMenu()
-{
-	IMAGE button_regret,button_regret_2;
-	loadimage(&button_regret, L"button_regret.jpg",160,122);
-	loadimage(&button_regret_2, L"button_regret_2.jpg",160,122);
-
-	putimage(1050, 80, &button_regret);
-}
