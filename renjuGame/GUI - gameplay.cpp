@@ -1,6 +1,6 @@
 #include "renjuGame.h"
 
-void initInterface()
+void initGameplayGUI()
 {
 	IMAGE board, button_regret_1;
 	loadimage(&board, L"board.jpg");
@@ -18,7 +18,7 @@ void initInterface()
 }
 
 
-struct inst runInterface()
+struct inst runGameplayGUI()
 {
 	IMAGE button_regret_1, button_regret_2;
 	loadimage(&button_regret_1, L"button_regret_1.jpg", 100, 50);

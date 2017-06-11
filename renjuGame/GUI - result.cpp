@@ -1,10 +1,10 @@
 #include "renjuGame.h"
-void initResult()
+void initResultGUI()
 {
 
 }
 
-int runResult()
+int runResultGUI()
 {
-
+	return 0;
 }

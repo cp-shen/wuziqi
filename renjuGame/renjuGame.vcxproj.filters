@@ -24,10 +24,10 @@
     <ClCompile Include="GUI - menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GUI - interface.cpp">
+    <ClCompile Include="GUI - result.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GUI - result.cpp">
+    <ClCompile Include="GUI - gameplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

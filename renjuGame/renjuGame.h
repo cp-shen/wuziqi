@@ -36,17 +36,17 @@ struct inst
 };
 
 //GUIÄ£¿é
-int runMenu();
-void initMenu();
-struct inst runInterface();
-void initInterface();
-int runResult();
-void initResult();
+int runMenuGUI();
+void initMenuGUI();
+struct inst runGameplayGUI();
+void initGameplayGUI();
+int runResultGUI();
+void initResultGUI();
 
 //GamePlayÄ£¿é
 void battle();
 void play(struct renju *head,int player,int *turn_p, struct inst instruction);
-void regret(struct renju **head);
+void regret(struct renju **head,int *turn_p);
 void redraw(struct renju *head);
 void draw(struct renju *head);
 int isWin(struct renju *head);

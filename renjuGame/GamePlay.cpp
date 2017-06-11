@@ -2,7 +2,7 @@
 
 void battle()
 {
-	initInterface();
+	initGameplayGUI();
 	struct inst instruction;
 
 	int turn = 1;
@@ -15,7 +15,7 @@ void battle()
 	while (win == NONE)
 	{
 
-		instruction = runInterface();
+		instruction = runGameplayGUI();
 		//接收GUI读取的用户指令
 		Sleep(100);
 		//防止按住鼠标的连续读取
@@ -32,7 +32,7 @@ void battle()
 		}
 		else if (instruction.operation == REGRET)
 		{
-			regret(&head);
+			regret(&head, turn_p);
 			redraw(head);
 		}
 		
@@ -95,7 +95,7 @@ void draw(struct renju*head)
 
 void redraw(struct renju *head)
 {
-	initInterface();
+	initGameplayGUI();
 
 	while (head != NULL)
 	{
@@ -223,7 +223,7 @@ int isWin(struct renju *head)
 	return NONE;
 }
 
-void regret(struct renju **headPointer)
+void regret(struct renju **headPointer,int *turn_p)
 {
 	if ((*headPointer)->next == NULL)
 		//此时还未下子，只有一个空节点，悔棋无效
@@ -235,6 +235,7 @@ void regret(struct renju **headPointer)
 		(*headPointer) = (struct renju*)malloc(LEN);
 		(*headPointer)->next = NULL;
 		//重置为只有一个空节点，改变头指针
+		(*turn_p)--;
 	}
 
 	else
@@ -249,7 +250,7 @@ void regret(struct renju **headPointer)
 		headcpy->next = (struct renju*)malloc(LEN);
 		headcpy->next->next = NULL;
 		//将最后一次落子，即倒数第二个节点变为空节点
-
+		(*turn_p)--;
 	}
 }
 

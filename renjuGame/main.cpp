@@ -7,8 +7,8 @@ int main()
 
 	while (run == 1)
 	{
-		initMenu();
-		flag = runMenu();
+		initMenuGUI();
+		flag = runMenuGUI();
 		Sleep(500);//防止按住鼠标的连续读取
 
 		switch (flag)
