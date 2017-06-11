@@ -4,7 +4,7 @@ void initGameplayGUI()
 {
 	IMAGE board, button_regret_1;
 	loadimage(&board, L"board.jpg");
-	loadimage(&button_regret_1, L"button_regret_1.jpg", 100, 50);
+	loadimage(&button_regret_1, L"button_regret_1.jpg");
 
 	putimage(100, 100, &board);
 	putimage(0, 300, &button_regret_1);
@@ -21,8 +21,8 @@ void initGameplayGUI()
 struct inst runGameplayGUI()
 {
 	IMAGE button_regret_1, button_regret_2;
-	loadimage(&button_regret_1, L"button_regret_1.jpg", 100, 50);
-	loadimage(&button_regret_2, L"button_regret_2.jpg", 100, 50);
+	loadimage(&button_regret_1, L"button_regret_1.jpg");
+	loadimage(&button_regret_2, L"button_regret_2.jpg");
 
 	struct inst instruction;
 	//要返回的结构体变量

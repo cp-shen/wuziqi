@@ -17,8 +17,6 @@ void battle()
 
 		instruction = runGameplayGUI();
 		//接收GUI读取的用户指令
-		Sleep(100);
-		//防止按住鼠标的连续读取
 
 		if (turn % 2 == 1 && instruction.operation == GO)
 		{

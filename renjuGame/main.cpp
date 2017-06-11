@@ -9,7 +9,6 @@ int main()
 	{
 		initMenuGUI();
 		flag = runMenuGUI();
-		Sleep(500);//防止按住鼠标的连续读取
 
 		switch (flag)
 		{

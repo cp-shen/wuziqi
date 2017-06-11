@@ -15,6 +15,7 @@ void initResultGUI(int win)
 	else if (win == TIE)
 		putimage(0, 0, &tie);
 
+	getchar();
 }
 
 int runResultGUI()
