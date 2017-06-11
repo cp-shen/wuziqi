@@ -44,7 +44,7 @@ void initInterface();
 //GamePlayÄ£¿é
 void battle();
 void play(struct renju *head,int player,int *turn_p, struct inst instruction);
-void regret(struct renju **head, int *turn_p);
+void regret(struct renju **head);
 void redraw(struct renju *head);
 void draw(struct renju *head);
 int isWin(struct renju *head);

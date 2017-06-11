@@ -5,7 +5,7 @@ void battle()
 	initInterface();
 	struct inst instruction;
 
-	int turn = 0;
+	int turn = 1;
 	int *turn_p = &turn;
 	int win = NONE;
 
@@ -14,9 +14,11 @@ void battle()
 
 	while (win == NONE)
 	{
-		turn++;
+
 		instruction = runInterface();
-		Sleep(100);//防止按住鼠标的连续读取
+		//接收GUI读取的用户指令
+		Sleep(100);
+		//防止按住鼠标的连续读取
 
 		if (turn % 2 == 1 && instruction.operation == GO)
 		{
@@ -30,16 +32,15 @@ void battle()
 		}
 		else if (instruction.operation == REGRET)
 		{
-			regret(&head, turn_p);
+			regret(&head);
 			redraw(head);
 		}
 		
 		win = isWin(head);
 	}
-
+	
 	while (head->next!=NULL && head->next->next != NULL)
 		head = head->next;
-
 	head->next = NULL;
 	//删除尾部空节点
 
@@ -53,19 +54,14 @@ void play(struct renju *head,int player, int *turn_p,struct inst instruction)
 	while (head->next != NULL)
 	{
 		if (head->x == i&&head->y == j &&(head->player == BLACK_PLAYER||head->player==WHITE_PLAYER) )
-		{
-			(*turn_p)--;
 			return;//此时该处已经有棋子
-		}
+		
 		head = head->next;
 	}
 
 	if (head->x == i&&head->y == j && (head->player == BLACK_PLAYER || head->player == WHITE_PLAYER))
-	{
-		(*turn_p)--;
 		return;//此时该处已经有棋子(最后一个节点)
-	}
-
+	
 	head->x = i;
 	head->y = j;
 	head->player = player;
@@ -75,6 +71,8 @@ void play(struct renju *head,int player, int *turn_p,struct inst instruction)
 	//申请新节点
 	head = head->next;
 	head->next = NULL;
+
+	(*turn_p)++;
 }
 
 void draw(struct renju*head)
@@ -130,9 +128,15 @@ struct renju *search(struct renju *head ,int x,int y)
 }
 int isWin(struct renju *head)
 {
-	struct renju *last = head;
-	while (last->next!=NULL && last->next->next != NULL)
-		last = last->next;
+	if (head->next == NULL)
+		return NONE;
+	//此时未下子
+	
+	struct renju *headcpy = head;
+	//不改变isWIn中头指针的值，由于search需要
+	while ( headcpy->next->next != NULL)
+		headcpy = headcpy->next;
+	struct renju *last = headcpy;
 	//找到最后一个落子的节点
 
 	int i, j;//循环变量
@@ -219,24 +223,18 @@ int isWin(struct renju *head)
 	return NONE;
 }
 
-void regret(struct renju **headPointer, int *turn_p)
+void regret(struct renju **headPointer)
 {
 	if ((*headPointer)->next == NULL)
 		//此时还未下子，只有一个空节点，悔棋无效
-	{
-		(*turn_p)= (*turn_p) -1;
-		//无效悔棋，只取消本回合行动
 		return;
-	}
+
 	else if ((*headPointer)->next->next == NULL)
 		//此时只有一个子，有两个节点
 	{
 		(*headPointer) = (struct renju*)malloc(LEN);
 		(*headPointer)->next = NULL;
 		//重置为只有一个空节点，改变头指针
-
-		(*turn_p)= (*turn_p) -2;
-		//成功悔棋，取消本回合和上回合行动
 	}
 
 	else
@@ -251,8 +249,6 @@ void regret(struct renju **headPointer, int *turn_p)
 		headcpy->next = (struct renju*)malloc(LEN);
 		headcpy->next->next = NULL;
 		//将最后一次落子，即倒数第二个节点变为空节点
-		(*turn_p)= (*turn_p)-2;
-		//成功悔棋，取消本回合和上回合行动
 
 	}
 }
