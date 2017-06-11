@@ -31,7 +31,7 @@ int runMenuGUI()
 		if (mouse.x > 270 && mouse.x < 450 && mouse.y >250 && mouse.y < 340)
 		{
 			putimage(270, 250, &button_start_2);
-			if (mouse.mkLButton == true)
+			if (mouse.uMsg == WM_LBUTTONUP)
 				return START;
 		}
 		else
@@ -41,7 +41,7 @@ int runMenuGUI()
 		if (mouse.x > 270 && mouse.x < 450 && mouse.y >350 && mouse.y < 440)
 		{
 			putimage(270, 350, &button_exit_2);
-			if (mouse.mkLButton == true)
+			if (mouse.uMsg == WM_LBUTTONUP)
 				return EXIT;
 		}
 		else

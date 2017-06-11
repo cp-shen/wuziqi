@@ -32,7 +32,7 @@ struct inst runGameplayGUI()
 	//¶ÁÈ¡Êó±êÎ»ÖÃ
 	{
 		mouse = GetMouseMsg();
-		if (mouse.mkLButton == true && mouse.x > 115 && mouse.x < 610 && mouse.y>115 && mouse.y < 610)
+		if (mouse.uMsg== WM_LBUTTONUP && mouse.x > 115 && mouse.x < 610 && mouse.y>115 && mouse.y < 610)
 		{
 			instruction.operation = GO;
 			instruction.x = (mouse.x - 100 + 16) / 33;
@@ -44,7 +44,7 @@ struct inst runGameplayGUI()
 		if ( mouse.x > 0 && mouse.x < 100 && mouse.y>300 && mouse.y < 350)
 		{
 			putimage(0, 300, &button_regret_2);
-			if (mouse.mkLButton == true)
+			if (mouse.uMsg == WM_LBUTTONUP)
 			{
 				instruction.operation = REGRET;
 				return instruction;
