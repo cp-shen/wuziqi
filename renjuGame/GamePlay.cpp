@@ -44,6 +44,8 @@ void battle()
 	head->next = NULL;
 	//É¾³ýÎ²²¿¿Õ½Úµã
 
+	initResultGUI(win);
+
 }
 
 void play(struct renju *head,int player, int *turn_p,struct inst instruction)

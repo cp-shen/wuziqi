@@ -41,7 +41,7 @@ void initMenuGUI();
 struct inst runGameplayGUI();
 void initGameplayGUI();
 int runResultGUI();
-void initResultGUI();
+void initResultGUI(int win);
 
 //GamePlayÄ£¿é
 void battle();
