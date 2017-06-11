@@ -18,6 +18,7 @@
 
 #define REPLAY 8
 #define FINISH 9
+#define CONTINUE 10
 
 #define LEN sizeof(struct renju)
 
@@ -45,6 +46,8 @@ struct inst runGameplayGUI();
 void initGameplayGUI();
 int runResultGUI();
 void initResultGUI(int win);
+int runReplayGUI();
+void initReplayGUI();
 
 //GamePlayÄ£¿é
 void battle();
@@ -54,6 +57,6 @@ void redraw(struct renju *head);
 void draw(struct renju *head);
 int isWin(struct renju *head);
 struct renju *search(struct renju *head, int x, int y);
-
+void replay(struct renju *head);
 
 #endif // !renju_h

@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GUI - gameplay.cpp" />
+    <ClCompile Include="GUI - replay.cpp" />
     <ClCompile Include="GUI - result.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GUI - menu.cpp" />
+    <ClCompile Include="Replay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renjuGame.h" />

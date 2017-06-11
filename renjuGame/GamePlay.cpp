@@ -47,13 +47,13 @@ void battle()
 	switch (runResultGUI())
 	{
 	case REPLAY:
-		
+		replay(head);
 		break;
 	case FINISH:
 		break;
 	}
-
 }
+
 
 void play(struct renju *head,int player, int *turn_p,struct inst instruction)
 {

@@ -3,14 +3,10 @@
 int main()
 {
 	int run = 1;
-	int flag;
-
 	while (run == 1)
 	{
 		initMenuGUI();
-		flag = runMenuGUI();
-
-		switch (flag)
+		switch (runMenuGUI())
 		{
 		case START:
 			battle();
