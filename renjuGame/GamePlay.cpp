@@ -21,12 +21,12 @@ void battle()
 		if (turn % 2 == 1 && instruction.operation == GO)
 		{
 			play(head, WHITE_PLAYER, turn_p, instruction);
-			draw(head);
+			drawLast(head);
 		}
 		else if (turn % 2 == 0 && instruction.operation == GO)
 		{
 			play(head, BLACK_PLAYER, turn_p, instruction);
-			draw(head);
+			drawLast(head);
 		}
 		else if (instruction.operation == REGRET)
 		{
@@ -36,11 +36,7 @@ void battle()
 		
 		win = isWin(head);
 	}
-	
-	while (head->next!=NULL && head->next->next != NULL)
-		head = head->next;
-	head->next = NULL;
-	//删除尾部空节点
+	//链表最后一个节点为空节点
 
 	initResultGUI(win);
 
@@ -84,7 +80,7 @@ void play(struct renju *head,int player, int *turn_p,struct inst instruction)
 	(*turn_p)++;
 }
 
-void draw(struct renju*head)
+void drawLast(struct renju*head)
 {
 	while (head->next != NULL && head->next->next != NULL)
 		//尾部为空节点，故最后一个棋子在倒数第二个节点
