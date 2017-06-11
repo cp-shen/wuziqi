@@ -44,6 +44,15 @@ void battle()
 
 	initResultGUI(win);
 
+	switch (runResultGUI())
+	{
+	case REPLAY:
+		
+		break;
+	case FINISH:
+		break;
+	}
+
 }
 
 void play(struct renju *head,int player, int *turn_p,struct inst instruction)

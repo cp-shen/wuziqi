@@ -16,6 +16,9 @@
 #define GO 6
 #define REGRET 7
 
+#define REPLAY 8
+#define FINISH 9
+
 #define LEN sizeof(struct renju)
 
 struct renju
