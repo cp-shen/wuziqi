@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="GUI - interface.cpp" />
+    <ClCompile Include="GUI - result.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GUI - menu.cpp" />
   </ItemGroup>

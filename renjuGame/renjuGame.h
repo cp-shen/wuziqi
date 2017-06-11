@@ -40,6 +40,8 @@ int runMenu();
 void initMenu();
 struct inst runInterface();
 void initInterface();
+int runResult();
+void initResult();
 
 //GamePlayÄ£¿é
 void battle();
