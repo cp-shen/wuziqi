@@ -79,7 +79,7 @@ void rebattle(renju *head)
 	}
 	while (win == NONE)
 	{
-
+			
 		instruction = runGameplayGUI();
 		//接收GUI读取的用户指令
 
